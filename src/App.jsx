@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import NavBar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import CartPage from './pages/CartPage'
 import Product from './pages/ProductPage'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
     <div>
-      <NavBar />
+      <Navbar />
 
       <main>
         <Routes>
