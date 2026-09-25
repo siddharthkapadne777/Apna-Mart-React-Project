@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getProducts } from "../api/index"
 import Loading from '../components/Loading'
+import ProductCard from '../components/ProductCard'
+import Ratings from '../components/Ratings'
 
-const Product = () => {
+const ProductPage = () => {
     const { id } = useParams()
     const [product, setProduct] = useState(null)
     const [sameCategoryProducts, setSameCategoryProducts] = useState([])
@@ -39,8 +41,11 @@ const Product = () => {
     return (
         <div>
             <div className='flex flex-col gap-2 lg:flex-row'>
-                <div className='flex justify-center bg-stone-100 p-4 lg:p-8'>
+                <div className='flex relative justify-center bg-stone-100 p-4 lg:p-8'>
                     <img className='w-60 lg:w-96' src={product.image} alt={product.title} width="200" />
+                    <div className="absolute right-0 bottom-0 text-3xl p-2">
+                        <Ratings product={product} />
+                    </div>
                 </div>
                 <div className='p-2'>
                     <h2 className='text-4xl font-medium'>{product.title}</h2>
@@ -51,15 +56,9 @@ const Product = () => {
             </div>
             <div className='p-2 mt-8 lg:mt-16'>
                 <h3 className='text-xl font-semibold mb-3'>More in this category</h3>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6'>
                     {sameCategoryProducts.map((item) => (
-                        <Link to={`/product/${item.id}`} key={item.id} className='block'>
-                            <div className='bg-stone-100 h-full rounded-md p-2 hover:shadow-md transition'>
-                                <img src={item.image} alt={item.title} className='h-28 w-full object-contain mb-2' />
-                                <p className='text-sm font-medium line-clamp-2'>{item.title}</p>
-                                <p className='text-green-500 font-bold mt-1'>&#36;{item.price}</p>
-                            </div>
-                        </Link>
+                        <ProductCard key={item.id} product={item} />
                     ))}
                 </div>
             </div>
@@ -67,4 +66,4 @@ const Product = () => {
     )
 }
 
-export default Product
+export default ProductPage
