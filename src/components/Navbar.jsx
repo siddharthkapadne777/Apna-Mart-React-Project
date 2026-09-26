@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Home, ShoppingCart } from 'lucide-react'
 
-const Temp = () => {
+const Navbar = () => {
     return (
         <div className='sticky top-0 left-0 z-50'>
             <nav className='flex border-b-[0.5px] relative border-stone-200 bg-white/80 backdrop-blur-xl'>
@@ -16,4 +16,4 @@ const Temp = () => {
     )
 }
 
-export default Temp
+export default Navbar
