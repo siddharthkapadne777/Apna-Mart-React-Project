@@ -7,7 +7,6 @@ const Orders = () => {
     const [userOrders, setUserOrders] = useState([]);
 
     useEffect(() => {
-        // 1. Check if user is logged in
         const userString = localStorage.getItem('currentUser');
         if (!userString) {
             navigate('/login');
@@ -16,11 +15,9 @@ const Orders = () => {
         
         const user = JSON.parse(userString);
         
-        // 2. Fetch all orders and filter only the ones for this user
         const allOrders = JSON.parse(localStorage.getItem('orders')) || [];
         const filteredOrders = allOrders.filter(order => order.userEmail === user.email);
         
-        // 3. Reverse the array so the newest order is at the top
         setUserOrders(filteredOrders.reverse());
     }, [navigate]);
 
@@ -47,7 +44,6 @@ const Orders = () => {
                 {userOrders.map((order) => (
                     <div key={order.id} className="bg-white border border-stone-200 rounded-xl shadow-sm overflow-hidden">
                         
-                        {/* Order Header */}
                         <div className="bg-stone-50 p-4 border-b border-stone-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                             <div>
                                 <p className="text-sm text-stone-500">Order Placed</p>
@@ -63,11 +59,10 @@ const Orders = () => {
                             </div>
                         </div>
 
-                        {/* Order Items */}
                         <div className="p-4 flex flex-col gap-4">
                             {order.items.map((item) => (
                                 <div key={item.id} className="flex items-center gap-4">
-                                    <div className="w-16 h-16 bg-stone-100 rounded p-1 flex-shrink-0">
+                                    <div className="w-16 h-16 bg-stone-100 rounded p-1 shrink-0">
                                         <img src={item.image} alt={item.title} className="w-full h-full object-contain mix-blend-multiply" />
                                     </div>
                                     <div className="flex-1">
